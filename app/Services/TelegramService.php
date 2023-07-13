@@ -6,12 +6,26 @@ use Illuminate\Support\Facades\Http;
 
 class TelegramService
 {
-    public function sendingToTelegram(string $status, array $data): ?object
-    {
-        $token = "6324935363:AAGvbpOyubvGzSJYlCgBfnnIKKYxo8w2jk8";
+    private string $token = "6324935363:AAGvbpOyubvGzSJYlCgBfnnIKKYxo8w2jk8";
+    private int $chatId = -1001849119254;
+    private string $url = "https://api.telegram.org/bot";
 
-        if ($status === "success") {
-            $status = "
+    public function sendingToTelegram(string $status): ?object
+    {
+        $getQuery = [
+            "chat_id" 	=> $this->chatId,
+            "text"  	=> $status,
+            "parse_mode" => "html"
+        ];
+
+        $response = Http::post($this->url . $this->token ."/sendMessage?" . http_build_query($getQuery));
+
+        return $response->object();
+    }
+
+    public function createMessage(array $data): string
+    {
+        return "
             Добавлен новый лид\n
             Имя: {$data['first_name']}\n
             Фамилия: {$data['last_name']}\n
@@ -21,16 +35,5 @@ class TelegramService
             Емейл: {$data['email']}\n
             Коментарии: {$data['comment']}
             ";
-        }
-
-        $getQuery = [
-            "chat_id" 	=> -1001849119254,
-            "text"  	=> $status,
-            "parse_mode" => "html"
-        ];
-
-        $response = Http::post("https://api.telegram.org/bot". $token ."/sendMessage?" . http_build_query($getQuery));
-
-        return $response->object();
     }
 }

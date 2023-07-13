@@ -13,7 +13,7 @@ use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
 {
-    public function __construct(private LeadService $leadAddService, private TelegramService $telegramService)
+    public function __construct(private LeadService $leadService, private TelegramService $telegramService)
     {
     }
 
@@ -28,9 +28,13 @@ class UserController extends Controller
 
         User::create($data);
 
-        $status = $this->leadAddService->addLead($data);
+        $status = $this->leadService->addLead($data);
 
-        $this->telegramService->sendingToTelegram($status, $data);
+        if (empty($status)) {
+            $status = $this->telegramService->createMessage($data);
+        }
+
+        $this->telegramService->sendingToTelegram($status);
 
         return back();
     }
