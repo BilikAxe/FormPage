@@ -13,14 +13,14 @@
         @csrf
         <h3>Контакт</h3>
         <fieldset>
-            <input placeholder="Имя" type="text" name="firstName" tabindex="1" value="{{ old('firstName') }}" required autofocus>
-            @error('firstName')
+            <input placeholder="Имя" type="text" name="first_name" tabindex="1" value="{{ old('first_name') }}" required autofocus>
+            @error('first_name')
             <span class='label-text'>{{ $message }}</span>
             @enderror
         </fieldset>
         <fieldset>
-            <input placeholder="Фамилия" type="text" name="lastName" tabindex="1" value="{{ old('lastName') }}" required autofocus>
-            @error('lastName')
+            <input placeholder="Фамилия" type="text" name="last_name" tabindex="1" value="{{ old('last_name') }}" required autofocus>
+            @error('last_name')
             <span class='label-text'>{{ $message }}</span>
             @enderror
         </fieldset>

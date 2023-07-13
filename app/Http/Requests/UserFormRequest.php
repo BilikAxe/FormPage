@@ -24,8 +24,8 @@ class UserFormRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'firstName' => 'required|string|min:2',
-            'lastName' => 'required|string|min:2',
+            'first_name' => 'required|string|min:2',
+            'last_name' => 'required|string|min:2',
             'surname' => 'required|min:2',
             'birthday' => 'required',
             'phone' => 'required|int',
@@ -50,8 +50,8 @@ class UserFormRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'firstName' => "\"Имя\"",
-            "lastName" => "\"Фамилия\"",
+            'first_name' => "\"Имя\"",
+            "last_name" => "\"Фамилия\"",
             "surname" => "\"Отчество\"",
             "birthday" => "\"Дата рождения\"",
             "phone" => "\"Телефон\"",
