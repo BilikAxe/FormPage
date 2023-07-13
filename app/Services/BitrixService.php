@@ -4,10 +4,20 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Http;
 
-class LeadService
+class BitrixService
 {
-    private string $queryURL = "https://b24-dlbjfa.bitrix24.ru/rest/1/5bc8y3ytyh25ek4z/";
+    private string $queryURL;
 
+    public function __construct()
+    {
+        $this->queryURL = "https://b24-dlbjfa.bitrix24.ru/rest/1/5bc8y3ytyh25ek4z/";
+    }
+
+    /**
+     * Добавляет новый лид и контакт в Битрикс24
+     * @param array $data массив данных из формы
+     * @return string|null возвращает либо ошибку либо ничего
+     */
     public function addLead(array $data): ?string
     {
         $phone = (!empty($data['phone'])) ? [['VALUE' => $data['phone'], 'VALUE_TYPE' => 'WORK']] : [];
@@ -26,7 +36,7 @@ class LeadService
             "params" => ["REGISTER_SONET_EVENT" => "Y"]
         ]);
 
-        if($response->serverError() or $response->clientError()) {
+        if($response->serverError() || $response->clientError()) {
             return "Ошибка при сохранении лида: ".mb_substr($response['error_description'], 0, -4);
         }
 

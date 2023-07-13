@@ -34,6 +34,10 @@ class UserFormRequest extends FormRequest
         ];
     }
 
+    /**
+     * Сообщение об ошибке ввода данных
+     * @return array возвращает массив с ошибками
+     */
     public function messages(): array
     {
         return [

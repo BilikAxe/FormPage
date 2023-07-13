@@ -6,11 +6,24 @@ use Illuminate\Support\Facades\Http;
 
 class TelegramService
 {
-    private string $token = "6324935363:AAGvbpOyubvGzSJYlCgBfnnIKKYxo8w2jk8";
-    private int $chatId = -1001849119254;
-    private string $url = "https://api.telegram.org/bot";
+    private string $token;
+    private int $chatId;
+    private string $url;
 
-    public function sendingToTelegram(string $message): ?object
+    public function __construct()
+    {
+        $this->url = "https://api.telegram.org/bot";
+        $this->chatId = -1001849119254;
+        $this->token = "6324935363:AAGvbpOyubvGzSJYlCgBfnnIKKYxo8w2jk8";
+    }
+
+
+    /**
+     * Отправляет сообщение в Телеграм
+     * @param string $message принимает текст сообщения
+     * @return void
+     */
+    public function sendingToTelegram(string $message): void
     {
         $getQuery = [
             "chat_id" 	=> $this->chatId,
@@ -18,11 +31,14 @@ class TelegramService
             "parse_mode" => "html"
         ];
 
-        $response = Http::post($this->url . $this->token ."/sendMessage?" . http_build_query($getQuery));
-
-        return $response->object();
+        Http::post($this->url . $this->token ."/sendMessage?" . http_build_query($getQuery));
     }
 
+    /**
+     * Создает текст сообщения в Телеграм на основе данных из формы
+     * @param array $data данные из формы
+     * @return string возвращает текст сообщения
+     */
     public function createMessage(array $data): string
     {
         return "
