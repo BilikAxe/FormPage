@@ -1,0 +1,1 @@
+{"params":{"method":"crm.lead.add","params":{"fields":{"TITLE":"From the site: daad adad","NAME":"daad","LAST_NAME":"adad","SECOND_NAME":"adada","BIRTHDATE":"1313-02-21","PHONE":[{"VALUE":"1234567","VALUE_TYPE":"WORK"}],"EMAIL":[{"VALUE":"adad@n","VALUE_TYPE":"HOME"}],"COMMENTS":"dawawda"}}}}
