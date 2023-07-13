@@ -10,11 +10,11 @@ class TelegramService
     private int $chatId = -1001849119254;
     private string $url = "https://api.telegram.org/bot";
 
-    public function sendingToTelegram(string $status): ?object
+    public function sendingToTelegram(string $message): ?object
     {
         $getQuery = [
             "chat_id" 	=> $this->chatId,
-            "text"  	=> $status,
+            "text"  	=> $message,
             "parse_mode" => "html"
         ];
 

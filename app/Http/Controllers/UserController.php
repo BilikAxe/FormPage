@@ -28,13 +28,13 @@ class UserController extends Controller
 
         User::create($data);
 
-        $status = $this->leadService->addLead($data);
+        $message = $this->leadService->addLead($data);
 
-        if (empty($status)) {
-            $status = $this->telegramService->createMessage($data);
+        if (empty($message)) {
+            $message = $this->telegramService->createMessage($data);
         }
 
-        $this->telegramService->sendingToTelegram($status);
+        $this->telegramService->sendingToTelegram($message);
 
         return back();
     }
